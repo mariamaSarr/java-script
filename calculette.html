@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculatrice</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Calculatrice</h1>
+
+    <form id="calculatorForm">
+        <label for="number1">Nombre 1:</label>
+        <input type="text" id="number1" name="number1" required pattern="[0-9]+">
+
+        <label for="number2">Nombre 2:</label>
+        <input type="text" id="number2" name="number2" required pattern="[0-9]+" oninput="validateInput()">
+
+        <button type="button" onclick="calculate()">Calculer</button>
+    </form>
+
+    <div id="results">
+        <h2>Résultats</h2>
+        <p id="sum"></p>
+        <p id="product"></p>
+        <p id="quotient"></p>
+        <p id="difference"></p>
+    </div>
+
+    <script>
+        function validateInput() {
+            // Empêcher la saisie de caractères non numériques
+            var inputNumber2 = document.getElementById('number2');
+            inputNumber2.setCustomValidity('');
+            if (!/^[0-9]+$/.test(inputNumb er2.value)) {
+                inputNumber2.setCustomValidity('Veuillez saisir un nombre valide.');
+            }
+
+            // Éviter la division par 0
+            var number2Value = parseFloat(inputNumber2.value);
+            if (number2Value === 0) {
+                inputNumber2.setCustomValidity('Le deuxième nombre ne peut pas être zéro.');
+            }
+        }
+
+        function calculate() {
+            var number1 = parseFloat(document.getElementById('number1').value);
+            var number2 = parseFloat(document.getElementById('number2').value);
+
+            var sum = number1 + number2;
+            var product = number1 * number2;
+            var quotient = number1 / number2;
+            var difference = number1 - number2;
+
+            document.getElementById('sum').innerText = 'Somme: ' + sum;
+            document.getElementById('product').innerText = 'Produit: ' + product;
+            document.getElementById('quotient').innerText = 'Quotient: ' + quotient;
+            document.getElementById('difference').innerText = 'Différence: ' + difference;
+        }
+    </script>
+</body>
+</html>
